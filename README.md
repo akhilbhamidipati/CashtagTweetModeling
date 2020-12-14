@@ -44,4 +44,18 @@ Below is a general summarization / pseudocode of the ITMTF algorithm which helpe
 
 The goal of this project was to find relevant words which where causally linked with price movements so that we could use the document collection in the future to predict trends. Ultimately, what our code does is evaluate which words' coverages over time are most strongly causally linked to changed in price within a 5-day lag. Further improvements on our project will be able to more effectively find significantly causal words which are linked to movements in price and more accurately predict changes in stock prices based on the coverage of topics in tweets with the respective cashtag. 
 
+## Implementation
+
+1. We begin by using Tweepy, a twitter querying API to retreive tweets with the cashtags $TSLA, $PLTR, and $NFLX and format them into files with their date and the tweet.
+2. Parse the files from step 1 to make document collections
+3. Create corpuses to maintain a vocabulary and calculate word coverage over time in the time series
+4. Use Granger Testing to test for a causality relationship where the coverage of a word over time in the given corpus "Granger causes" the change in the stock's price within a lag of 5 days.
+5. Evaluate words which are significantly causal and possible implications/inferences.
+
+## A Walk-Through of our Project
+
+## Contributions of Each Member
+
+The project began with data collection by Joshua. The team decided that Twitter is a good platform to retrieve data from. After setting up a developer account, he began to pull tweets that contained PLTR, NFLX, and TSLA. 100 tweets were pulled from every day for the last month all using Twitter’s API. These tweets were written into a respective .txt file and each tweet was treated as a document. Angeeras led the algorithms for topic modeling. Akhil contributed to the topic modeling as well. On top of that, he implemented Granger tests in R. The dataset for these algorithms to be run on came from the tweets that Joshua provided as well as the stock data that Akhil provided from Yahoo Finance. Overall the project was split very well. The contributions made by all members were all equally important in completing the project and also a great learning experience in applying class material to real world analysis.
+
 
