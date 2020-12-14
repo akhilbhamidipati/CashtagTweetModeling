@@ -17,17 +17,25 @@ We proposed to implement the paper titled Mining Causal Topics in Text Data: Ite
 Below is a general summarization / pseudocode of the ITMTF algorithm which helped us understand the paper: 
 
 1. Identify our time series response data (X = x1, ..., xn) with timestamp t1, ..., tn
- 1a. Stock data
+
+> 1a. Stock data
+
 2. Identify collection of documents form same time period D = {(d1,td1), ..., (dm, tdm)}
  
- 2a. Twitter tweets
+> 2a. Twitter tweets
+
 3. Use a topic modeling method to generate topics for each doc  T1, .., Ttn
  
- 3a. This topic modeling method is M
+> 3a. This topic modeling method is M
  
- 3b. Going to apply M to D, 
+> 3b. Going to apply M to D, 
+
 4. Find topics with high causality
+
 5. For each topic apply C to find most significant causal words in the top words of the topic and get the impact of these significant words
+
 6. Separate positive impact terms and negative impact terms
+
 7. Assign prior probabilities according to significance level
+
 8. Use the prior to repeat until we reach good topic quality
