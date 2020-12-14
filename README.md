@@ -68,27 +68,3 @@ We decided to use the closing prices of stocks $TSLA, $PLTR, and $NFLX as our ti
 After creating the document collection, we created parsers using the PSLA algorithm to determine the probabilities of words in different ranges of vocabulary. The probabilities we calculated include a word in a tweet, a word in a tweet within a day, etc. We used stopwords as well to minimize the noise in our document collection. Additionally, our parser identified non-english tweets and scrapped them from the document collection.
 
 We used the same R library used by the paper used for determining Granger causality with the top 200 words for each of our three stock tickers. We experimented with different time lags between the range of 3-6 days to find the best results. 
-
-
-## Contributions of Each Member
-
-The project began with data collection by Joshua. The team decided that Twitter is a good platform to retrieve data from. After setting up a developer account, he began to pull tweets that contained PLTR, NFLX, and TSLA. 100 tweets were pulled from every day for the last month all using Twitter’s API. These tweets were written into a respective .txt file and each tweet was treated as a document. Angeeras led the algorithms for topic modeling. Akhil contributed to the topic modeling as well. On top of that, he implemented Granger tests in R. The dataset for these algorithms to be run on came from the tweets that Joshua provided as well as the stock data that Akhil provided from Yahoo Finance. Overall the project was split very well. The contributions made by all members were all equally important in completing the project and also a great learning experience in applying class material to real world analysis.
-
-
-## Conclusions & Further Research
-
-Things we learned:
-
-- Creating a Twitter Document collection was quite difficult
-- Excess noise in tweets makes it hard to scrape a good document collection
-- Iterative topic modeling is complicated
-- Pictures are very difficult to model
-- Creating topic models for short documents is tricky
-
-Potential Future Extensions of this Project:
-
-- Try to model more stocks and see what words we find as causally linked for these tickers
-- Implement the feedback loop to allow our causal topics/words to guide our model and make it much more oaccurate
-- Use the data from the project to created predictive models based on sentiment and topic coverage
-
-
