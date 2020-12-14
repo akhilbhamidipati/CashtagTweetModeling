@@ -1,0 +1,360 @@
+---
+title: "410 Final Project Granger Testing"
+author: "Akhil Bhamidipati, Angeeras Ramanath, Josh Perakis"
+date: "12/13/2020"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+For all of the following Granger Tests, the response variable is the closing price of either TSLA, PLTR, or NFLX on any given day in the time series and the predictor variable is the coverage of the given topic/word up to a time lag of 5 days before. If the results of the Granger Test return a p-value under our designated cut-off, we will say that the given word/topic is said to be causally linked to whatever degree suggested by the p-value. For the sake of making this file easier to read, we will only print out the results of the Granger Tests for the words/topics which we designate to be "significantly causal." In some cases, we did not find very much causality so expanded our cutoff so that we could still see some of the more highly correlated words.
+
+```{r}
+library(lmtest)
+library(zoo)
+```
+
+
+# Tesla (TSLA) Causal Words
+
+Here we take a look at the specific topics which were chosen as the top 200 most covered for TSLA and then display the results of the Granger tests where the words are causally linked to the stock price with a p-value less than 0.25 and within a lag of 5 days. The topics for which we decided to test causality in their coverage over time were selected using human interaction (we hand selected them because we thought they were the most important).
+
+```{r, exec = T, eval = T}
+tesla_cov = read.csv("tsla_word_coverage_over_time_cleaned.csv", check.names = F)
+
+#colnames(tesla_cov)
+
+tsla_lag = 5
+tsla_alpha_cutoff = 0.25
+
+if (grangertest(tesla_cov$'Tsla-Close' ~ tesla_cov$"Great!", order = tsla_lag)$`Pr(>F)`[2] < tsla_alpha_cutoff) {
+  print(grangertest(tesla_cov$'Tsla-Close' ~ tesla_cov$"Great!", order = tsla_lag))
+  print("Great!")
+}
+if (grangertest(tesla_cov$'Tsla-Close' ~ tesla_cov$"target", order = tsla_lag)$`Pr(>F)`[2] < tsla_alpha_cutoff) {
+  print(grangertest(tesla_cov$'Tsla-Close' ~ tesla_cov$"target", order = tsla_lag))
+  print("target")
+}
+if (grangertest(tesla_cov$'Tsla-Close' ~ tesla_cov$"Expect", order = tsla_lag)$`Pr(>F)`[2] < tsla_alpha_cutoff) {
+  print(grangertest(tesla_cov$'Tsla-Close' ~ tesla_cov$"Expect", order = tsla_lag))
+}
+if (grangertest(tesla_cov$'Tsla-Close' ~ tesla_cov$"nice", order = tsla_lag)$`Pr(>F)`[2] < tsla_alpha_cutoff) {
+  print(grangertest(tesla_cov$'Tsla-Close' ~ tesla_cov$"nice", order = tsla_lag))
+}
+if (grangertest(tesla_cov$'Tsla-Close' ~ tesla_cov$"biggest", order = tsla_lag)$`Pr(>F)`[2] < tsla_alpha_cutoff) {
+  print(grangertest(tesla_cov$'Tsla-Close' ~ tesla_cov$"biggest", order = tsla_lag))
+}
+if (grangertest(tesla_cov$'Tsla-Close' ~ tesla_cov$"catalyst", order = tsla_lag)$`Pr(>F)`[2] < tsla_alpha_cutoff) {
+  print(grangertest(tesla_cov$'Tsla-Close' ~ tesla_cov$"catalyst", order = tsla_lag))
+}
+if (grangertest(tesla_cov$'Tsla-Close' ~ tesla_cov$"betting", order = tsla_lag)$`Pr(>F)`[2] < tsla_alpha_cutoff) {
+  print(grangertest(tesla_cov$'Tsla-Close' ~ tesla_cov$"betting", order = tsla_lag))
+}
+if (grangertest(tesla_cov$'Tsla-Close' ~ tesla_cov$"Buy,", order = tsla_lag)$`Pr(>F)`[2] < tsla_alpha_cutoff) {
+  print(grangertest(tesla_cov$'Tsla-Close' ~ tesla_cov$"Buy,", order = tsla_lag))
+}
+if (grangertest(tesla_cov$'Tsla-Close' ~ tesla_cov$"upgraded", order = tsla_lag)$`Pr(>F)`[2] < tsla_alpha_cutoff) {
+  print(grangertest(tesla_cov$'Tsla-Close' ~ tesla_cov$"upgraded", order = tsla_lag))
+}
+if (grangertest(tesla_cov$'Tsla-Close' ~ tesla_cov$"higher", order = tsla_lag)$`Pr(>F)`[2] < tsla_alpha_cutoff) {
+  print(grangertest(tesla_cov$'Tsla-Close' ~ tesla_cov$"higher", order = tsla_lag))
+}
+if (grangertest(tesla_cov$'Tsla-Close' ~ tesla_cov$"Improved", order = tsla_lag)$`Pr(>F)`[2] < tsla_alpha_cutoff) {
+  print(grangertest(tesla_cov$'Tsla-Close' ~ tesla_cov$"Improved", order = tsla_lag))
+}
+if (grangertest(tesla_cov$'Tsla-Close' ~ tesla_cov$"nice", order = tsla_lag)$`Pr(>F)`[2] < tsla_alpha_cutoff) {
+  print(grangertest(tesla_cov$'Tsla-Close' ~ tesla_cov$"nice", order = tsla_lag))
+}
+if (grangertest(tesla_cov$'Tsla-Close' ~ tesla_cov$"added", order = tsla_lag)$`Pr(>F)`[2] < tsla_alpha_cutoff) {
+  print(grangertest(tesla_cov$'Tsla-Close' ~ tesla_cov$"added", order = tsla_lag))
+}
+if (grangertest(tesla_cov$'Tsla-Close' ~ tesla_cov$"short", order = tsla_lag)$`Pr(>F)`[2] < tsla_alpha_cutoff) {
+  print(grangertest(tesla_cov$'Tsla-Close' ~ tesla_cov$"short", order = tsla_lag))
+}
+if (grangertest(tesla_cov$'Tsla-Close' ~ tesla_cov$"raised", order = tsla_lag)$`Pr(>F)`[2] < tsla_alpha_cutoff) {
+  print(grangertest(tesla_cov$'Tsla-Close' ~ tesla_cov$"raised", order = tsla_lag))
+}
+if (grangertest(tesla_cov$'Tsla-Close' ~ tesla_cov$"sell.", order = tsla_lag)$`Pr(>F)`[2] < tsla_alpha_cutoff) {
+  print(grangertest(tesla_cov$'Tsla-Close' ~ tesla_cov$"sell.", order = tsla_lag))
+  print("sell.")
+}
+if (grangertest(tesla_cov$'Tsla-Close' ~ tesla_cov$"bigger", order = tsla_lag)$`Pr(>F)`[2] < tsla_alpha_cutoff) {
+  print(grangertest(tesla_cov$'Tsla-Close' ~ tesla_cov$"bigger", order = tsla_lag))
+}
+if (grangertest(tesla_cov$'Tsla-Close' ~ tesla_cov$"disrupting", order = tsla_lag)$`Pr(>F)`[2] < tsla_alpha_cutoff) {
+  print(grangertest(tesla_cov$'Tsla-Close' ~ tesla_cov$"disrupting", order = tsla_lag))
+}
+if (grangertest(tesla_cov$'Tsla-Close' ~ tesla_cov$"upped", order = tsla_lag)$`Pr(>F)`[2] < tsla_alpha_cutoff) {
+  print(grangertest(tesla_cov$'Tsla-Close' ~ tesla_cov$"upped", order = tsla_lag))
+}
+if (grangertest(tesla_cov$'Tsla-Close' ~ tesla_cov$"@elonmusk", order = tsla_lag)$`Pr(>F)`[2] < tsla_alpha_cutoff) {
+  print(grangertest(tesla_cov$'Tsla-Close' ~ tesla_cov$"@elonmusk", order = tsla_lag))
+}
+if (grangertest(tesla_cov$'Tsla-Close' ~ tesla_cov$"$nio", order = tsla_lag)$`Pr(>F)`[2] < tsla_alpha_cutoff) {
+  print(grangertest(tesla_cov$'Tsla-Close' ~ tesla_cov$"$nio", order = tsla_lag))
+}
+if (grangertest(tesla_cov$'Tsla-Close' ~ tesla_cov$"mistakes", order = tsla_lag)$`Pr(>F)`[2] < tsla_alpha_cutoff) {
+  print(grangertest(tesla_cov$'Tsla-Close' ~ tesla_cov$"mistakes", order = tsla_lag))
+}
+if (grangertest(tesla_cov$'Tsla-Close' ~ tesla_cov$"Elon", order = tsla_lag)$`Pr(>F)`[2] < tsla_alpha_cutoff) {
+  print(grangertest(tesla_cov$'Tsla-Close' ~ tesla_cov$"Elon", order = tsla_lag))
+}
+if (grangertest(tesla_cov$'Tsla-Close' ~ tesla_cov$"sales", order = tsla_lag)$`Pr(>F)`[2] < tsla_alpha_cutoff) {
+  print(grangertest(tesla_cov$'Tsla-Close' ~ tesla_cov$"sales", order = tsla_lag))
+  print("sales")
+}
+if (grangertest(tesla_cov$'Tsla-Close' ~ tesla_cov$"margin", order = tsla_lag)$`Pr(>F)`[2] < tsla_alpha_cutoff) {
+  print(grangertest(tesla_cov$'Tsla-Close' ~ tesla_cov$"margin", order = tsla_lag))
+}
+if (grangertest(tesla_cov$'Tsla-Close' ~ tesla_cov$"#niogang", order = tsla_lag)$`Pr(>F)`[2] < tsla_alpha_cutoff) {
+  print(grangertest(tesla_cov$'Tsla-Close' ~ tesla_cov$"#niogang", order = tsla_lag))
+}
+if (grangertest(tesla_cov$'Tsla-Close' ~ tesla_cov$"EV", order = tsla_lag)$`Pr(>F)`[2] < tsla_alpha_cutoff) {
+  print(grangertest(tesla_cov$'Tsla-Close' ~ tesla_cov$"EV", order = tsla_lag))
+}
+if (grangertest(tesla_cov$'Tsla-Close' ~ tesla_cov$"Addition", order = tsla_lag)$`Pr(>F)`[2] < tsla_alpha_cutoff) {
+  print(grangertest(tesla_cov$'Tsla-Close' ~ tesla_cov$"Addition", order = tsla_lag))
+}
+if (grangertest(tesla_cov$'Tsla-Close' ~ tesla_cov$"@tesla", order = tsla_lag)$`Pr(>F)`[2] < tsla_alpha_cutoff) {
+  print(grangertest(tesla_cov$'Tsla-Close' ~ tesla_cov$"@tesla", order = tsla_lag))
+}
+```
+# Palantir (PLTR) Causal Words
+
+Here we take a look at the specific topics which were chosen as the top 200 most covered for PLTR and then display the results of the Granger tests where the words are causally linked to the stock price with a p-value less than 0.15 and within a lag of 5 days. The topics for which we decided to test causality in their coverage over time were selected using human interaction (we hand selected them because we thought they were the most important).
+
+```{r}
+pltr_cov = read.csv("pltr_word_coverage_over_time_cleaned.csv", check.names = F)
+
+# View(colnames(pltr_cov))
+
+pltr_lag = 5
+pltr_alpha_cutoff = 0.15
+
+if (grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"IPOs", order = pltr_lag)$`Pr(>F)`[2] < pltr_alpha_cutoff) {
+  print(grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"IPOs", order = pltr_lag))
+}
+if (grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"$TTD", order = pltr_lag)$`Pr(>F)`[2] < pltr_alpha_cutoff) {
+  print(grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"$TTD", order = pltr_lag))
+}
+if (grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"$WKHS", order = pltr_lag)$`Pr(>F)`[2] < pltr_alpha_cutoff) {
+  print(grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"$WKHS", order = pltr_lag))
+}
+if (grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"$UBER", order = pltr_lag)$`Pr(>F)`[2] < pltr_alpha_cutoff) {
+  print(grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"$UBER", order = pltr_lag))
+}
+if (grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"Army", order = pltr_lag)$`Pr(>F)`[2] < pltr_alpha_cutoff) {
+  print(grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"Army", order = pltr_lag))
+}
+if (grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"$PINS", order = pltr_lag)$`Pr(>F)`[2] < pltr_alpha_cutoff) {
+  print(grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"$PINS", order = pltr_lag))
+}
+if (grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"$CRWD", order = pltr_lag)$`Pr(>F)`[2] < pltr_alpha_cutoff) {
+  print(grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"$CRWD", order = pltr_lag))
+}
+if (grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"$DDOG", order = pltr_lag)$`Pr(>F)`[2] < pltr_alpha_cutoff) {
+  print(grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"$DDOG", order = pltr_lag))
+}
+if (grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"$OKTA", order = pltr_lag)$`Pr(>F)`[2] < pltr_alpha_cutoff) {
+  print(grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"$OKTA", order = pltr_lag))
+  print("$OKTA")
+}
+if (grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"$TSLA", order = pltr_lag)$`Pr(>F)`[2] < pltr_alpha_cutoff) {
+  print(grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"$TSLA", order = pltr_lag))
+  print("$TSLA")
+}
+if (grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"$WORK", order = pltr_lag)$`Pr(>F)`[2] < pltr_alpha_cutoff) {
+  print(grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"$WORK", order = pltr_lag))
+}
+if (grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"best", order = pltr_lag)$`Pr(>F)`[2] < pltr_alpha_cutoff) {
+  print(grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"best", order = pltr_lag))
+}
+if (grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"big", order = pltr_lag)$`Pr(>F)`[2] < pltr_alpha_cutoff) {
+  print(grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"big", order = pltr_lag))
+}
+if (grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"rally", order = pltr_lag)$`Pr(>F)`[2] < pltr_alpha_cutoff) {
+  print(grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"rally", order = pltr_lag))
+}
+if (grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"indices,", order = pltr_lag)$`Pr(>F)`[2] < pltr_alpha_cutoff) {
+  print(grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"indices,", order = pltr_lag))
+}
+if (grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"indices", order = pltr_lag)$`Pr(>F)`[2] < pltr_alpha_cutoff) {
+  print(grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"indices", order = pltr_lag))
+}
+if (grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"sparked", order = pltr_lag)$`Pr(>F)`[2] < pltr_alpha_cutoff) {
+  print(grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"sparked", order = pltr_lag))
+}
+if (grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"contract", order = pltr_lag)$`Pr(>F)`[2] < pltr_alpha_cutoff) {
+  print(grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"contract", order = pltr_lag))
+}
+if (grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"higher", order = pltr_lag)$`Pr(>F)`[2] < pltr_alpha_cutoff) {
+  print(grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"higher", order = pltr_lag))
+}
+if (grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"addition", order = pltr_lag)$`Pr(>F)`[2] < pltr_alpha_cutoff) {
+  print(grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"addition", order = pltr_lag))
+}
+if (grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"PEG", order = pltr_lag)$`Pr(>F)`[2] < pltr_alpha_cutoff) {
+  print(grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"PEG", order = pltr_lag))
+}
+if (grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"Targets:", order = pltr_lag)$`Pr(>F)`[2] < pltr_alpha_cutoff) {
+  print(grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"Targets:", order = pltr_lag))
+}
+if (grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"@traderstewie:", order = pltr_lag)$`Pr(>F)`[2] < pltr_alpha_cutoff) {
+  print(grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"@traderstewie:", order = pltr_lag))
+  print("@traderstewie")
+}
+if (grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"$DKNG", order = pltr_lag)$`Pr(>F)`[2] < pltr_alpha_cutoff) {
+  print(grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"$DKNG", order = pltr_lag))
+}
+if (grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"$DOCU", order = pltr_lag)$`Pr(>F)`[2] < pltr_alpha_cutoff) {
+  print(grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"$DOCU", order = pltr_lag))
+}
+if (grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"$QQQ", order = pltr_lag)$`Pr(>F)`[2] < pltr_alpha_cutoff) {
+  print(grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"$QQQ", order = pltr_lag))
+}
+if (grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"earnings", order = pltr_lag)$`Pr(>F)`[2] < pltr_alpha_cutoff) {
+  print(grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"earnings", order = pltr_lag))
+}
+if (grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"$AMZN", order = pltr_lag)$`Pr(>F)`[2] < pltr_alpha_cutoff) {
+  print(grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"$AMZN", order = pltr_lag))
+}
+
+if (grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"$FB", order = pltr_lag)$`Pr(>F)`[2] < pltr_alpha_cutoff) {
+  print(grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"$FB", order = pltr_lag))
+}
+if (grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"$NFLX", order = pltr_lag)$`Pr(>F)`[2] < pltr_alpha_cutoff) {
+  print(grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"$NFLX", order = pltr_lag))
+}
+if (grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"$MSFT", order = pltr_lag)$`Pr(>F)`[2] < pltr_alpha_cutoff) {
+  print(grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"$MSFT", order = pltr_lag))
+}
+if (grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"Technologies", order = pltr_lag)$`Pr(>F)`[2] < pltr_alpha_cutoff) {
+  print(grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"Technologies", order = pltr_lag))
+  print("Technologies")
+}
+if (grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"INTERESTING", order = pltr_lag)$`Pr(>F)`[2] < pltr_alpha_cutoff) {
+  print(grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"INTERESTING", order = pltr_lag))
+  print("INTERESTING")
+}
+if (grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"$spy", order = pltr_lag)$`Pr(>F)`[2] < pltr_alpha_cutoff) {
+  print(grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"$spy", order = pltr_lag))
+}
+if (grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"Data", order = pltr_lag)$`Pr(>F)`[2] < pltr_alpha_cutoff) {
+  print(grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"Data", order = pltr_lag))
+}
+if (grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"$spx", order = pltr_lag)$`Pr(>F)`[2] < pltr_alpha_cutoff) {
+  print(grangertest(pltr_cov$'pltr-Close' ~ pltr_cov$"$spx", order = pltr_lag))
+}
+```
+
+# Netflix (NFLX) Causal Words
+
+Here we take a look at the specific topics which were chosen as the top 200 most covered for NFLX and then display the results of the Granger tests where the words are causally linked to the stock price with a p-value less than 0.15 and within a lag of 5 days. The topics for which we decided to test causality in their coverage over time were selected using human interaction (we hand selected them because we thought they were the most important).
+
+```{r}
+nflx_cov = read.csv("nflx_word_coverage_over_time_cleaned.csv", check.names = F)
+
+#View(colnames(nflx_cov))
+
+nflx_lag = 5
+nflx_alpha_cutoff = 0.15
+
+if (grangertest(nflx_cov$'nflx-Close' ~ nflx_cov$"Trade", order = nflx_lag)$`Pr(>F)`[2] < nflx_alpha_cutoff) {
+  print(grangertest(nflx_cov$'nflx-Close' ~ nflx_cov$"Trade", order = nflx_lag))
+}
+if (grangertest(nflx_cov$'nflx-Close' ~ nflx_cov$"Nov", order = nflx_lag)$`Pr(>F)`[2] < nflx_alpha_cutoff) {
+  print(grangertest(nflx_cov$'nflx-Close' ~ nflx_cov$"Nov", order = nflx_lag))
+}
+if (grangertest(nflx_cov$'nflx-Close' ~ nflx_cov$"$AMZN", order = nflx_lag)$`Pr(>F)`[2] < nflx_alpha_cutoff) {
+  print(grangertest(nflx_cov$'nflx-Close' ~ nflx_cov$"$AMZN", order = nflx_lag))
+}
+if (grangertest(nflx_cov$'nflx-Close' ~ nflx_cov$"$AAPL", order = nflx_lag)$`Pr(>F)`[2] < nflx_alpha_cutoff) {
+  print(grangertest(nflx_cov$'nflx-Close' ~ nflx_cov$"$AAPL", order = nflx_lag))
+}
+if (grangertest(nflx_cov$'nflx-Close' ~ nflx_cov$"Dec", order = nflx_lag)$`Pr(>F)`[2] < nflx_alpha_cutoff) {
+  print(grangertest(nflx_cov$'nflx-Close' ~ nflx_cov$"Dec", order = nflx_lag))
+}
+if (grangertest(nflx_cov$'nflx-Close' ~ nflx_cov$"$msft", order = nflx_lag)$`Pr(>F)`[2] < nflx_alpha_cutoff) {
+  print(grangertest(nflx_cov$'nflx-Close' ~ nflx_cov$"$msft", order = nflx_lag))
+}
+if (grangertest(nflx_cov$'nflx-Close' ~ nflx_cov$"$DIS", order = nflx_lag)$`Pr(>F)`[2] < nflx_alpha_cutoff) {
+  print(grangertest(nflx_cov$'nflx-Close' ~ nflx_cov$"$DIS", order = nflx_lag))
+}
+if (grangertest(nflx_cov$'nflx-Close' ~ nflx_cov$"$tsla", order = nflx_lag)$`Pr(>F)`[2] < nflx_alpha_cutoff) {
+  print(grangertest(nflx_cov$'nflx-Close' ~ nflx_cov$"$tsla", order = nflx_lag))
+}
+if (grangertest(nflx_cov$'nflx-Close' ~ nflx_cov$"Biggest", order = nflx_lag)$`Pr(>F)`[2] < nflx_alpha_cutoff) {
+  print(grangertest(nflx_cov$'nflx-Close' ~ nflx_cov$"Biggest", order = nflx_lag))
+}
+if (grangertest(nflx_cov$'nflx-Close' ~ nflx_cov$"mistakes", order = nflx_lag)$`Pr(>F)`[2] < nflx_alpha_cutoff) {
+  print(grangertest(nflx_cov$'nflx-Close' ~ nflx_cov$"mistakes", order = nflx_lag))
+}
+if (grangertest(nflx_cov$'nflx-Close' ~ nflx_cov$"growth", order = nflx_lag)$`Pr(>F)`[2] < nflx_alpha_cutoff) {
+  print(grangertest(nflx_cov$'nflx-Close' ~ nflx_cov$"growth", order = nflx_lag))
+  print("growth")
+}
+if (grangertest(nflx_cov$'nflx-Close' ~ nflx_cov$"notable", order = nflx_lag)$`Pr(>F)`[2] < nflx_alpha_cutoff) {
+  print(grangertest(nflx_cov$'nflx-Close' ~ nflx_cov$"notable", order = nflx_lag))
+  print("notable")
+}
+
+if (grangertest(nflx_cov$'nflx-Close' ~ nflx_cov$"Earnings", order = nflx_lag)$`Pr(>F)`[2] < nflx_alpha_cutoff) {
+  print(grangertest(nflx_cov$'nflx-Close' ~ nflx_cov$"Earnings", order = nflx_lag))
+}
+if (grangertest(nflx_cov$'nflx-Close' ~ nflx_cov$"love", order = nflx_lag)$`Pr(>F)`[2] < nflx_alpha_cutoff) {
+  print(grangertest(nflx_cov$'nflx-Close' ~ nflx_cov$"love", order = nflx_lag))
+}
+if (grangertest(nflx_cov$'nflx-Close' ~ nflx_cov$"$TSLA", order = nflx_lag)$`Pr(>F)`[2] < nflx_alpha_cutoff) {
+  print(grangertest(nflx_cov$'nflx-Close' ~ nflx_cov$"$TSLA", order = nflx_lag))
+}
+if (grangertest(nflx_cov$'nflx-Close' ~ nflx_cov$"$NIO", order = nflx_lag)$`Pr(>F)`[2] < nflx_alpha_cutoff) {
+  print(grangertest(nflx_cov$'nflx-Close' ~ nflx_cov$"$NIO", order = nflx_lag))
+}
+if (grangertest(nflx_cov$'nflx-Close' ~ nflx_cov$"break", order = nflx_lag)$`Pr(>F)`[2] < nflx_alpha_cutoff) {
+  print(grangertest(nflx_cov$'nflx-Close' ~ nflx_cov$"break", order = nflx_lag))
+}
+if (grangertest(nflx_cov$'nflx-Close' ~ nflx_cov$"activity", order = nflx_lag)$`Pr(>F)`[2] < nflx_alpha_cutoff) {
+  print(grangertest(nflx_cov$'nflx-Close' ~ nflx_cov$"activity", order = nflx_lag))
+}
+if (grangertest(nflx_cov$'nflx-Close' ~ nflx_cov$"Top", order = nflx_lag)$`Pr(>F)`[2] < nflx_alpha_cutoff) {
+  print(grangertest(nflx_cov$'nflx-Close' ~ nflx_cov$"Top", order = nflx_lag))
+}
+if (grangertest(nflx_cov$'nflx-Close' ~ nflx_cov$"Tech", order = nflx_lag)$`Pr(>F)`[2] < nflx_alpha_cutoff) {
+  print(grangertest(nflx_cov$'nflx-Close' ~ nflx_cov$"Tech", order = nflx_lag))
+}
+if (grangertest(nflx_cov$'nflx-Close' ~ nflx_cov$"catching", order = nflx_lag)$`Pr(>F)`[2] < nflx_alpha_cutoff) {
+  print(grangertest(nflx_cov$'nflx-Close' ~ nflx_cov$"catching", order = nflx_lag))
+}
+if (grangertest(nflx_cov$'nflx-Close' ~ nflx_cov$"lagging", order = nflx_lag)$`Pr(>F)`[2] < nflx_alpha_cutoff) {
+  print(grangertest(nflx_cov$'nflx-Close' ~ nflx_cov$"lagging", order = nflx_lag))
+}
+if (grangertest(nflx_cov$'nflx-Close' ~ nflx_cov$"@PandaOptions:", order = nflx_lag)$`Pr(>F)`[2] < nflx_alpha_cutoff) {
+  print(grangertest(nflx_cov$'nflx-Close' ~ nflx_cov$"@PandaOptions:", order = nflx_lag))
+}
+if (grangertest(nflx_cov$'nflx-Close' ~ nflx_cov$"Pandas", order = nflx_lag)$`Pr(>F)`[2] < nflx_alpha_cutoff) {
+  print(grangertest(nflx_cov$'nflx-Close' ~ nflx_cov$"Pandas", order = nflx_lag))
+}
+if (grangertest(nflx_cov$'nflx-Close' ~ nflx_cov$"$crm", order = nflx_lag)$`Pr(>F)`[2] < nflx_alpha_cutoff) {
+  print(grangertest(nflx_cov$'nflx-Close' ~ nflx_cov$"$crm", order = nflx_lag))
+}
+if (grangertest(nflx_cov$'nflx-Close' ~ nflx_cov$"FREE", order = nflx_lag)$`Pr(>F)`[2] < nflx_alpha_cutoff) {
+  print(grangertest(nflx_cov$'nflx-Close' ~ nflx_cov$"FREE", order = nflx_lag))
+}
+if (grangertest(nflx_cov$'nflx-Close' ~ nflx_cov$"GCI", order = nflx_lag)$`Pr(>F)`[2] < nflx_alpha_cutoff) {
+  print(grangertest(nflx_cov$'nflx-Close' ~ nflx_cov$"GCI", order = nflx_lag))
+}
+if (grangertest(nflx_cov$'nflx-Close' ~ nflx_cov$"$spy", order = nflx_lag)$`Pr(>F)`[2] < nflx_alpha_cutoff) {
+  print(grangertest(nflx_cov$'nflx-Close' ~ nflx_cov$"$spy", order = nflx_lag))
+}
+if (grangertest(nflx_cov$'nflx-Close' ~ nflx_cov$"@CNBCFastMoney:", order = nflx_lag)$`Pr(>F)`[2] < nflx_alpha_cutoff) {
+  print(grangertest(nflx_cov$'nflx-Close' ~ nflx_cov$"@CNBCFastMoney:", order = nflx_lag))
+}
+if (grangertest(nflx_cov$'nflx-Close' ~ nflx_cov$"Buy", order = nflx_lag)$`Pr(>F)`[2] < nflx_alpha_cutoff) {
+  print(grangertest(nflx_cov$'nflx-Close' ~ nflx_cov$"Buy", order = nflx_lag))
+  print("Buy")
+}
+```
