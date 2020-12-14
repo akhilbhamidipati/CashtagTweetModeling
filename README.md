@@ -12,6 +12,8 @@ An evaluation of how coverage of topics in tweets with cashtags ($TSLA, $PLTR, $
 
 We proposed to implement the paper titled Mining Causal Topics in Text Data: Iterative Topic Modeling with Time Series Feedback. In this paper they used AAL and AAPL stock as well as Presidential Probability odds as time series data and New York Times text data. The topic modeling is generic, however, in the paper they only implement the PLSA (Probabilistic Semantic Analysis) method. The paper uses both Pearson correlation coefficient and Granger causality to quantitatively evaluate the correlations. Our project was to implement the iterative topic modeling with time series feedback (ITMTF) algorithm to identify which words from tweets are linked causally to stock price changes.
 
+Hyun Duk Kim, Malu Castellanos, Meichun Hsu, ChengXiang Zhai, Thomas Rietz, and Daniel Diermeier. 2013. Mining causal topics in text data: Iterative topic modeling with time series feedback. In Proceedings of the 22nd ACM international conference on information & knowledge management (CIKM 2013). ACM, New York, NY, USA, 885-890. DOI=10.1145/2505515.2505612
+
 ## ITMTF Algorithm
 
 Below is a general summarization / pseudocode of the ITMTF algorithm which helped us understand the paper: 
@@ -53,6 +55,10 @@ The goal of this project was to find relevant words which where causally linked 
 5. Evaluate words which are significantly causal and possible implications/inferences.
 
 ## A Walk-Through of our Project
+
+Take a look at our demo video on Youtube: 
+
+In the file twitter_stock.py you will find the first steps of our project which involved retrieval of tweets. We then generated the tweets we retreived into the files tweet_data_tsla.txt, tweet_data_pltr.txt, and tweet_data_nflx.txt. At this point we were ready for the main portion of our project which can be found in doc_collection_topic_modeling.html or doc_collection_topic_modeling.ipynb. In this step, we first parsed the data from the previous files to create comprehensive document collections and then went ahead and intialized corpuses for all of these document collections while ignoring stopwords. After intializing these corpuses, we performed topic modeling calculations (which are further documented in doc_collection_topic_modeling.html) to understand the coverage of the most highly covered words at any point in our time series over time. Once we had narrowed down our list of words for every corpus along with their coverage over time, we converted these data frames into csv's so that we could import them in R and perform Granger tests. The final step of our project can be observed in grangertesting.html or grangertesting.Rmd and what it essentially comprises of is hand-selecting topics from the top 200 topics that we had filtered for in the previous step, and then performing a Granger test for causality from the coverage of that topic in the time series to movements in that stock's price within 5 days. After completing that last step, we were able to find a few words who's coverage over time was causally linked to changes in the stock's price.
 
 ## Contributions of Each Member
 
