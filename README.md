@@ -39,3 +39,9 @@ Below is a general summarization / pseudocode of the ITMTF algorithm which helpe
 7. Assign prior probabilities according to significance level
 
 8. Use the prior to repeat until we reach good topic quality
+
+## Purpose
+
+The goal of this project was to find relevant words which where causally linked with price movements so that we could use the document collection in the future to predict trends. Ultimately, what our code does is evaluate which words' coverages over time are most strongly causally linked to changed in price within a 5-day lag. Further improvements on our project will be able to more effectively find significantly causal words which are linked to movements in price and more accurately predict changes in stock prices based on the coverage of topics in tweets with the respective cashtag. 
+
+
