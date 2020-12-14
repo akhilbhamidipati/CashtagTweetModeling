@@ -4,7 +4,7 @@ An evaluation of how coverage of topics in tweets with cashtags ($TSLA, $PLTR, $
 
 #### Team Members:
 
-  **Captain -> Akhil Bhamidipati (akhilsb2)**,
+  Akhil Bhamidipati (akhilsb2),
   Angeeras Ramanath (ar13),
   Joshua Perakis (perakis2)
   
