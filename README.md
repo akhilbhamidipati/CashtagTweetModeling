@@ -75,16 +75,20 @@ We used the same R library used by the paper used for determining Granger causal
 The project began with data collection by Joshua. The team decided that Twitter is a good platform to retrieve data from. After setting up a developer account, he began to pull tweets that contained PLTR, NFLX, and TSLA. 100 tweets were pulled from every day for the last month all using Twitter’s API. These tweets were written into a respective .txt file and each tweet was treated as a document. Angeeras led the algorithms for topic modeling. Akhil contributed to the topic modeling as well. On top of that, he implemented Granger tests in R. The dataset for these algorithms to be run on came from the tweets that Joshua provided as well as the stock data that Akhil provided from Yahoo Finance. Overall the project was split very well. The contributions made by all members were all equally important in completing the project and also a great learning experience in applying class material to real world analysis.
 
 
-## Conclusions & Further Research - This part is not done yet
+## Conclusions & Further Research
 
-Creating a Twitter Document collection was quite difficult. Limitations of developer account and excess noise in tweets causing it hard to scrape a good document collection.
+Things we learned:
 
+- creating a Twitter Document collection was quite difficult
+- excess noise in tweets makes it hard to scrape a good document collection
+- iterative topic modeling is complicated
+- pictures are very difficult to model
+- creating topic models for short documents is tricky
 
-We experienced challenges with creating the Twitter document collection. One challenge was that our developer account did not have a high enough rate limit to 
+Potential Future Extensions of this Project:
 
- people who tag several ticker symbols in their tweet to try to make it more popular. These tweets often are not focused on the stock we are trying to observe and will create unnecessary noise. Another challenge is getting a complete understanding of how to use the prior in the iterative topic modeling and writing out the code for this process. A third problem we are facing comes in the presence of pictures. Oftentimes people will tweet a picture of a stock chart or the picture will contain essential information without which the tweets itself may seem out of context or to be missing information. Therefore, we are trying to think about what the best way to handle pictures will be. Right now we are thinking about filtering images out and ignoring all non-text data, but should we find that these tweets contain crucial text data, we may try to include them somehow.
-
-
-How can we clear noise from tweets better? Better Topic Modeling? Better parsing / developer accounts? Smaller granularity of time for stock market data and tweets for better correlation?
+- Try to model more stocks and see what words we find as causally linked for these tickers
+- Implement the feedback loop to allow our causal topics/words to guide our model and make it much more oaccurate
+- Use the data from the project to created predictive models based on sentiment and topic coverage
 
 
