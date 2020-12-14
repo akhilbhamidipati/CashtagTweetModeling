@@ -79,11 +79,11 @@ The project began with data collection by Joshua. The team decided that Twitter 
 
 Things we learned:
 
-- creating a Twitter Document collection was quite difficult
-- excess noise in tweets makes it hard to scrape a good document collection
-- iterative topic modeling is complicated
-- pictures are very difficult to model
-- creating topic models for short documents is tricky
+- Creating a Twitter Document collection was quite difficult
+- Excess noise in tweets makes it hard to scrape a good document collection
+- Iterative topic modeling is complicated
+- Pictures are very difficult to model
+- Creating topic models for short documents is tricky
 
 Potential Future Extensions of this Project:
 
